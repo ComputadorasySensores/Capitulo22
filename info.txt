@@ -1,0 +1,36 @@
+Lineas de código o intrucciones para Capitulo 22 de Computadoras y sensores
+
+Editar: sudo nano /boot/config.txt
+Agregar al final:
+dtoverlay=enc28j60
+
+////////////////////////
+
+Crear un archivo para iniciar como servicio en systemd con:
+sudo nano /lib/systemd/system/establecer_mac.service
+
+Pegar lo siguiente:
+
+Wants=network-pre.target
+Before=network-pre.target
+BindsTo=sys-subsystem-net-devices-eth0.device
+After=sys-subsystem-net-devices-eth0.device
+
+[Service]
+Type=oneshot
+ExecStart=/sbin/ip link set dev eth0 address 00:00:00:00:00:00
+ExecStart=/sbin/ip link set dev eth0 up
+
+[Install]
+WantedBy=multi-user.target
+
+////////////////////////
+
+Establecer permisos, reiniciar el daemon y habilitarlo para que inicie al arranque.
+
+$ sudo chmod 644 /lib/systemd/system/establecer_mac.service
+$ sudo systemctl daemon-reload
+$ sudo systemctl enable establecer_mac.service
+
+//////////////////////
+
