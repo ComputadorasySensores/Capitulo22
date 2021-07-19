@@ -1,4 +1,4 @@
-Lineas de código o intrucciones para Capitulo 22 de Computadoras y sensores
+Lineas de cÃ³digo o intrucciones para Capitulo 22 de Computadoras y sensores
 
 Editar: sudo nano /boot/config.txt
 Agregar al final:
@@ -23,6 +23,11 @@ ExecStart=/sbin/ip link set dev eth0 up
 
 [Install]
 WantedBy=multi-user.target
+
+////////////////////////
+
+Ejecutar ifconfig para obtener el MAC address asignado y copiarlo, volver a editar el archivo establecer_mac.service reemplazando el
+00:00:00:00:00:00 por el valor copiado anteriormente.
 
 ////////////////////////
 
